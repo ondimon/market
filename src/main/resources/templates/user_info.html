@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>User info</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container" th:object = "${user}">
+    <div th:replace="~{navigation :: navigation(UserInfo)}" />
+
+    <h3>Id:</h3>
+    <span th:text="*{id}"></span>
+
+    <h3>User name:</h3>
+    <span th:text="*{username}"></span>
+
+    <h3>E-mail:</h3>
+    <span th:text="*{email}"></span>
+    <p>
+    <div sec:authorize="hasRole('ADMIN')">
+
+        <h5>Authenticated user roles:</h5>
+        <span sec:authentication="principal.authorities"></span>
+
+        <h5>Locked</h5>
+        <span th:text="*{locked}"></span>
+    </div>
+    </p>
+</div>
+</body>
+</html>
