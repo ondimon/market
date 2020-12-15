@@ -10,5 +10,5 @@ public class ProductDto {
     @NotNull
     private Long id;
     private  String Title;
-    private int price;
+    private Double price;
 }

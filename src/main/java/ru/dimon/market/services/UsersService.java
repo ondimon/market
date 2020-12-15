@@ -15,6 +15,7 @@ import ru.dimon.market.mappers.ProductMapper;
 import ru.dimon.market.mappers.UserMapper;
 import ru.dimon.market.repositories.UsersRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,16 +56,15 @@ public class UsersService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
+        List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(new SimpleGrantedAuthority(user.getRole().name()));
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
                                                                       user.getPassword(),
                                                                       true,
                                                                       true,
                                                                       true,
                                                                       !user.isLocked(),
-                                                                      mapRolesToAuthorities(user.getRoles()));
+                                                                      roles);
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-    }
 }
