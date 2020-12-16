@@ -23,7 +23,7 @@ public class Product {
     private String title;
 
     @Column(name = "price")
-    private int price;
+    private Double price;
 
     @JsonIgnore
     @ManyToMany
@@ -31,10 +31,4 @@ public class Product {
               joinColumns = @JoinColumn(name = "product_id"),
               inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
-
-    public Product(Long id, String title, int price) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-    }
 }
