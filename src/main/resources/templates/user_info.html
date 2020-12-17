@@ -20,7 +20,7 @@
     <h3>E-mail:</h3>
     <span th:text="*{email}"></span>
     <p>
-    <div sec:authorize="hasAnyAuthority('ADMIN')">
+    <div sec:authorize="hasAnyAuthority(T(ru.dimon.market.entities.Role).ADMIN.name())">
 
         <h5>Authenticated user roles:</h5>
         <span sec:authentication="principal.authorities"></span>
