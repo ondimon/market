@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: router-client
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config_server
