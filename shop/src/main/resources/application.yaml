@@ -7,7 +7,9 @@ spring:
     name: shop-client
   cloud:
     config:
-      uri: localhost:8888
+      discovery:
+        enabled: true
+        service-id: config_server
   thymeleaf:
     encoding: UTF-8
     prefix: file:Shop/src/main/resources/templates/

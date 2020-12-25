@@ -1,7 +1,7 @@
 rootProject.name = 'market'
 
-include 'Shop'
-include 'ConfigServer'
+include 'shop'
+include 'configserver'
 include 'newsserver'
 include 'routerserver'
 include 'eurekaserver'

@@ -1,6 +1,10 @@
+server:
+  port: 8081
 spring:
   application:
     name: news-client
   cloud:
     config:
-      uri: localhost:8888
+      discovery:
+        enabled: true
+        service-id: config_server

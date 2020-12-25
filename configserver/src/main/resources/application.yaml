@@ -7,11 +7,11 @@ spring:
     config:
       server:
         native:
-          search-locations: classpath:/config
-#        git:
-#          uri:
-#          search-paths:
-#          clone-on-start:
+          searchLocations: classpath:/config
+  #        git:
+  #          uri:
+  #          search-paths:
+  #          clone-on-start:
   application:
     name: config_server
 

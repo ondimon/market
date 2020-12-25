@@ -3,4 +3,6 @@ spring:
     name: router-client
   cloud:
     config:
-      uri: localhost:8888
+      discovery:
+        enabled: true
+        service-id: config_server
