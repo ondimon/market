@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: router-client
+  cloud:
+    config:
+      uri: localhost:8888

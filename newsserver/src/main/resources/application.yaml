@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: news-client
+  cloud:
+    config:
+      uri: localhost:8888

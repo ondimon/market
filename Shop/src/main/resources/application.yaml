@@ -1,0 +1,20 @@
+#server:
+#  port: 8181
+#  servlet:
+#    context-path: /
+spring:
+  application:
+    name: shop-client
+  cloud:
+    config:
+      uri: localhost:8888
+  thymeleaf:
+    encoding: UTF-8
+    prefix: file:Shop/src/main/resources/templates/
+    cache: false
+  jackson:
+    serialization:
+      indent_output: true
+  web:
+    resources:
+      static-locations: file:Shop/src/main/resources/static/
