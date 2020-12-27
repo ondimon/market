@@ -7,8 +7,12 @@ import ru.dimon.shop.entities.Order;
 import ru.dimon.shop.mappers.OrderMapper;
 import ru.dimon.shop.repositories.OrdersRepository;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+
 
 @Service
 public class OrdersService {
@@ -28,4 +32,5 @@ public class OrdersService {
                         .map(order -> mapper.fromOrder(order))
                         .collect(Collectors.toList());
     }
+
 }

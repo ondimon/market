@@ -13,7 +13,9 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
+	implementation 'org.springframework.boot:spring-boot-starter-integration'
+	implementation 'org.springframework.integration:spring-integration-http'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-bootstrap', version: '3.0.0-M5'
 
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
