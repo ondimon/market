@@ -16,6 +16,7 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
 	implementation 'org.springframework.boot:spring-boot-starter-integration'
 	implementation 'org.springframework.integration:spring-integration-http'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-bootstrap', version: '3.0.0-M5'
 
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
@@ -24,6 +25,7 @@ dependencies {
 	implementation 'org.apache.logging.log4j:log4j-api:2.13.3'
 	implementation 'org.apache.logging.log4j:log4j-core:2.13.3'
 	implementation 'wsdl4j:wsdl4j'
+	implementation 'org.flywaydb:flyway-core'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 
