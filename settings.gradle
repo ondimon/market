@@ -5,4 +5,5 @@ include 'configserver'
 include 'newsserver'
 include 'routerserver'
 include 'eurekaserver'
+include 'orderservice'
 

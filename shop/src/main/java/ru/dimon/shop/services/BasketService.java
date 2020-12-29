@@ -3,16 +3,16 @@ package ru.dimon.shop.services;
 import org.springframework.stereotype.Service;
 import ru.dimon.shop.dto.BasketDto;
 import ru.dimon.shop.dto.ProductDto;
-import ru.dimon.shop.entities.Basket;
-import ru.dimon.shop.entities.Product;
-import ru.dimon.shop.entities.User;
+import ru.dimon.shop.entities.*;
 import ru.dimon.shop.mappers.ProductMapper;
 import ru.dimon.shop.repositories.BasketRepository;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,11 +20,13 @@ public class BasketService {
     private final BasketRepository  basketRepository;
     private final UsersService usersService;
     private final ProductsService productsService;
+    private final OrdersService ordersService;
 
-    public BasketService(BasketRepository basketRepository, UsersService usersService, ProductsService productsService) {
+    public BasketService(BasketRepository basketRepository, UsersService usersService, ProductsService productsService, OrdersService ordersService) {
         this.basketRepository = basketRepository;
         this.usersService = usersService;
         this.productsService = productsService;
+        this.ordersService = ordersService;
     }
 
     public BasketDto getBasketByUser(String name) {
@@ -78,10 +80,45 @@ public class BasketService {
         return basketRepository.save(basket);
     }
 
+    public void createOrder(String username) {
+        User user = usersService.findByUsername(username);
+        if(user == null){
+            throw new RuntimeException("User is not found");
+        }
+        Basket basket = user.getBasket();
+        if(basket == null || basket.getProducts().isEmpty()){
+            return;
+        }
+
+        Order order = new Order();
+        order.setStatus(OrderStatus.NEW);
+        order.setUser(user);
+
+        Map<Product, Long> productWithAmount = basket.getProducts().stream()
+                .collect(Collectors.groupingBy(product -> product, Collectors.counting()));
+
+        List<OrderDetails> orderDetails = productWithAmount.entrySet().stream()
+                .map(pair -> new OrderDetails(order, pair.getKey(), pair.getValue()))
+                .collect(Collectors.toList());
+
+        BigDecimal total = new BigDecimal(orderDetails.stream()
+                .map(detail -> detail.getPrice().multiply(detail.getAmount()))
+                .mapToDouble(BigDecimal::doubleValue).sum());
+
+        order.setDetails(orderDetails);
+        order.setSum(total);
+        order.setAddress("none");
+
+        ordersService.saveOrder(order);
+        basket.getProducts().clear();
+        basketRepository.save(basket);
+    }
     private List<Product> getCollectRefProductsByIds(List<Long> productIds) {
         return productIds.stream()
                 .map(productsService::findById)
                 .collect(Collectors.toList());
     }
+
+
 
 }
