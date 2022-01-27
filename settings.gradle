@@ -1,1 +1,8 @@
 rootProject.name = 'market'
+
+include 'shop'
+include 'configserver'
+include 'newsserver'
+include 'routerserver'
+include 'eurekaserver'
+
