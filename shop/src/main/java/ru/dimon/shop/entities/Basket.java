@@ -1,12 +1,14 @@
 package ru.dimon.shop.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "baskets")
 @Data
+@ToString(of ={"id"})
 public class Basket {
 
     @Id
